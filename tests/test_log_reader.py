@@ -15,11 +15,8 @@ def test_if_LogReader_object_is_iterable():
 
 
 def test_LogReader_FileNotFoundError_handled():
-    try:
+    with pytest.raises(FileNotFoundError):
         log_reader = LogReader('file/that/not/exists', None, None)
-        next(log_reader)
-    except FileNotFoundError:
-        pytest.fail("File not found not handled")
 
 
 def test_LogReader_for_correct_number_of_records_with_defined_from_and_to_dates():
@@ -29,7 +26,7 @@ def test_LogReader_for_correct_number_of_records_with_defined_from_and_to_dates(
     counter = 0
     for _ in log_reader:
         counter += 1
-    assert counter == 10
+    assert counter == 6
 
 
 def test_LogReader_for_correct_number_of_records_with_defined_from_date():
@@ -38,7 +35,7 @@ def test_LogReader_for_correct_number_of_records_with_defined_from_date():
     counter = 0
     for _ in log_reader:
         counter += 1
-    assert counter == 6
+    assert counter == 7
 
 
 def test_LogReader_for_correct_number_of_records_with_defined_to_date():
@@ -47,11 +44,11 @@ def test_LogReader_for_correct_number_of_records_with_defined_to_date():
     counter = 0
     for _ in log_reader:
         counter += 1
-    assert counter == 8
+    assert counter == 7
 
 
 def test_LogReader_for_correct_number_of_records_without_date_range():
-    log_reader = LogReader('file/that/not/exists', None, None)
+    log_reader = LogReader(logfile, None, None)
     counter = 0
     for _ in log_reader:
         counter += 1
