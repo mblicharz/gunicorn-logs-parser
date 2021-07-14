@@ -1,4 +1,5 @@
 from datetime import datetime
+from pathlib import Path
 
 
 class LogReader:
@@ -8,6 +9,8 @@ class LogReader:
             from_date: datetime,
             to_date: datetime
     ) -> None:
+        self._validate_path(file_path)
+
         self.file = file_path
         self.from_date = from_date
         self.to_date = to_date
@@ -18,6 +21,11 @@ class LogReader:
 
     def __next__(self):
         return next(self._reader)
+
+    def _validate_path(self, path: str) -> None:
+        file = Path(path)
+        if not file.is_file():
+            raise FileNotFoundError
 
     def _read_file(self):
         with open(self.file) as file_lines:
@@ -36,7 +44,17 @@ class LogReader:
 
         date_in_range = False
 
-        if self.from_date <= log_date <= self.to_date:
+        if not self.from_date and not self.to_date:
+            date_in_range = True
+
+        if self.from_date and not self.to_date and self.from_date <= log_date:
+            date_in_range = True
+
+        if not self.from_date and self.to_date and self.to_date >= log_date:
+            date_in_range = True
+
+        if self.from_date and self.to_date and\
+                self.from_date <= log_date <= self.to_date:
             date_in_range = True
 
         return date_in_range
