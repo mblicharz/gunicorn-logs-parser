@@ -14,6 +14,7 @@ class LogReader:
         self.file = file_path
         self.from_date = from_date
         self.to_date = to_date
+
         self._reader = self._read_file()
 
     def __iter__(self):
@@ -30,11 +31,16 @@ class LogReader:
     def _read_file(self):
         with open(self.file) as file_lines:
             next(file_lines)
+
             for file_line in file_lines:
                 log_line = self._fetch_log_line(file_line)
-                log_date_in_range = self._check_log_datetime(log_line)
-                if log_date_in_range:
-                    yield log_line
+
+                if self.from_date or self.to_date:
+                    log_date_in_range = self._check_log_datetime(log_line)
+                    if log_date_in_range:
+                        yield log_line
+
+                yield log_line
 
     def _fetch_log_line(self, file_line: str) -> str:
         return file_line.split(': ')[1]
@@ -44,10 +50,7 @@ class LogReader:
 
         date_in_range = False
 
-        if not self.from_date and not self.to_date:
-            date_in_range = True
-
-        elif self.from_date and not self.to_date and \
+        if self.from_date and not self.to_date and \
                 self.from_date <= log_date:
             date_in_range = True
 
