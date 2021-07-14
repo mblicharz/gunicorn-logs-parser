@@ -1,7 +1,6 @@
-from collections.abc import Iterable
-
 import pytest
 
+from collections.abc import Iterable
 from datetime_type import datetime_T
 from log_reader import LogReader
 from tests import tools

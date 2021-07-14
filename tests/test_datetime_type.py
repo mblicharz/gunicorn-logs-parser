@@ -1,7 +1,6 @@
-from datetime import datetime
-
 import pytest
 
+from datetime import datetime
 from datetime_type import datetime_T
 
 with_seconds_format = '%d-%m-%Y_%H-%M-%S'
