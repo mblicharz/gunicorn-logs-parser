@@ -1,34 +1,21 @@
 from datetime import datetime
 
-
-_date_format = '%d-%m-%Y'
-_time_format = '%H-%M-%S'
-_no_seconds_time_format = '%H-%M'
+_format = '%d-%m-%Y_%H-%M-%S'
+_no_seconds_format = '%d-%m-%Y_%H-%M'
 
 
-def datetime_T(datetime_str: str) -> str:
-    date, time = datetime_str.split('_')
-    _validate_date(date)
-    _validate_time(time)
+def datetime_T(datetime_str: str) -> datetime:
+    dt = None
 
-    return datetime_str
-
-
-def _validate_date(date_str: str) -> None:
     try:
-        datetime.strptime(date_str, _date_format)
-    except ValueError:
-        _print_error()
-
-
-def _validate_time(time_str: str) -> None:
-    try:
-        datetime.strptime(time_str, _time_format)
+        dt = datetime.strptime(datetime_str, _format)
     except ValueError:
         try:
-            datetime.strptime(time_str, _no_seconds_time_format)
+            dt = datetime.strptime(datetime_str, _no_seconds_format)
         except ValueError:
             _print_error()
+
+    return dt
 
 
 def _print_error():
