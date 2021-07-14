@@ -1,4 +1,4 @@
 from .log_reader import LogReader
-from .datetime_type import datetime_T
+from .datetime_parser import parse_to_datetime
 
-__all__ = ['LogReader', 'datetime_T']
+__all__ = ['LogReader', 'parse_to_datetime']

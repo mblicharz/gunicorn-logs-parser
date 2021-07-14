@@ -1,7 +1,7 @@
 import pytest
 
 from collections.abc import Iterable
-from log_reader import datetime_T
+from log_reader import parse_to_datetime
 from log_reader import LogReader
 from tests import tools
 
@@ -19,8 +19,8 @@ def test_LogReader_FileNotFoundError_handled():
 
 
 def test_LogReader_for_correct_number_of_records_with_defined_from_and_to_dates():
-    from_date = datetime_T('30-11-2019_21-00-16')
-    to_date = datetime_T('01-12-2019_11-06-07')
+    from_date = parse_to_datetime('30-11-2019_21-00-16')
+    to_date = parse_to_datetime('01-12-2019_11-06-07')
     log_reader = LogReader(logfile, from_date, to_date)
     counter = 0
     for _ in log_reader:
@@ -29,7 +29,7 @@ def test_LogReader_for_correct_number_of_records_with_defined_from_and_to_dates(
 
 
 def test_LogReader_for_correct_number_of_records_with_defined_from_date():
-    from_date = datetime_T('30-11-2019_20-02-08')
+    from_date = parse_to_datetime('30-11-2019_20-02-08')
     log_reader = LogReader(logfile, from_date, None)
     counter = 0
     for _ in log_reader:
@@ -38,7 +38,7 @@ def test_LogReader_for_correct_number_of_records_with_defined_from_date():
 
 
 def test_LogReader_for_correct_number_of_records_with_defined_to_date():
-    to_date = datetime_T('30-11-2019_20-02-08')
+    to_date = parse_to_datetime('30-11-2019_20-02-08')
     log_reader = LogReader(logfile, None, to_date)
     counter = 0
     for _ in log_reader:

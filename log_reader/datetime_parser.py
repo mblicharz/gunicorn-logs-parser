@@ -4,7 +4,7 @@ _format = '%d-%m-%Y_%H-%M-%S'
 _no_seconds_format = '%d-%m-%Y_%H-%M'
 
 
-def datetime_T(datetime_str: str) -> datetime:
+def parse_to_datetime(datetime_str: str) -> datetime:
     dt = None
 
     try:
