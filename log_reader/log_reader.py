@@ -47,13 +47,15 @@ class LogReader:
         if not self.from_date and not self.to_date:
             date_in_range = True
 
-        if self.from_date and not self.to_date and self.from_date <= log_date:
+        elif self.from_date and not self.to_date and \
+                self.from_date <= log_date:
             date_in_range = True
 
-        if not self.from_date and self.to_date and self.to_date >= log_date:
+        elif not self.from_date and self.to_date and \
+                self.to_date >= log_date:
             date_in_range = True
 
-        if self.from_date and self.to_date and\
+        elif self.from_date and self.to_date and \
                 self.from_date <= log_date <= self.to_date:
             date_in_range = True
 
