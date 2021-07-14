@@ -16,7 +16,6 @@ log_reader = LogReader(args.logfile, args.From, args.To)
 counter = 0
 
 for lines in log_reader:
-    print(lines)
     counter += 1
 
 print(f'requests: {counter}')
