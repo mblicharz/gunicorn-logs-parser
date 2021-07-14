@@ -1,19 +1,20 @@
 from datetime import datetime
 
-_format = '%d-%m-%Y_%H-%M-%S'
-_no_seconds_format = '%d-%m-%Y_%H-%M'
+VALID_DATE_FORMATS = ['%d-%m-%Y_%H-%M-%S', '%d-%m-%Y_%H-%M']
 
 
 def parse_to_datetime(datetime_str: str) -> datetime:
     dt = None
 
-    try:
-        dt = datetime.strptime(datetime_str, _format)
-    except ValueError:
+    for date_format in VALID_DATE_FORMATS:
         try:
-            dt = datetime.strptime(datetime_str, _no_seconds_format)
+            dt = datetime.strptime(datetime_str, date_format)
         except ValueError:
-            _print_error()
+            pass
+        else:
+            break
+    else:
+        _print_error()
 
     return dt
 
