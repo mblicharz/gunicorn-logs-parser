@@ -39,8 +39,8 @@ class LogReader:
                     log_date_in_range = self._check_log_datetime(log_line)
                     if log_date_in_range:
                         yield log_line
-
-                yield log_line
+                else:
+                    yield log_line
 
     def _fetch_log_line(self, file_line: str) -> str:
         return file_line.split(': ')[1]
