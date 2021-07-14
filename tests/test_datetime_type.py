@@ -1,7 +1,7 @@
 import pytest
 
 from datetime import datetime
-from datetime_type import datetime_T
+from log_reader import datetime_T
 
 with_seconds_format = '%d-%m-%Y_%H-%M-%S'
 no_seconds_format = '%d-%m-%Y_%H-%M'

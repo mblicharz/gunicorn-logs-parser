@@ -1,6 +1,6 @@
 import argparse
 
-from datetime_type import datetime_T
+from log_reader import datetime_T
 from log_reader import LogReader
 
 parser = argparse.ArgumentParser(description='parser')
