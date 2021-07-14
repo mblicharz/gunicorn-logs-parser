@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 
 _date_format = '%d-%m-%Y'
@@ -16,17 +16,17 @@ def datetime_T(datetime_str: str) -> str:
 
 def _validate_date(date_str: str) -> None:
     try:
-        datetime.datetime.strptime(date_str, _date_format)
+        datetime.strptime(date_str, _date_format)
     except ValueError:
         _print_error()
 
 
 def _validate_time(time_str: str) -> None:
     try:
-        datetime.datetime.strptime(time_str, _time_format)
+        datetime.strptime(time_str, _time_format)
     except ValueError:
         try:
-            datetime.datetime.strptime(time_str, _no_seconds_time_format)
+            datetime.strptime(time_str, _no_seconds_time_format)
         except ValueError:
             _print_error()
 
