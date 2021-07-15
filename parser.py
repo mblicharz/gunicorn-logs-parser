@@ -12,10 +12,3 @@ parser.add_argument('logfile', type=str)
 args = parser.parse_args()
 
 log_reader = LogReader(args.logfile, args.From, args.To)
-
-counter = 0
-
-for lines in log_reader:
-    counter += 1
-
-print(f'requests: {counter}')
