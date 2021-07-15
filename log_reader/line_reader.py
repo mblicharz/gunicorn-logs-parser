@@ -1,0 +1,2 @@
+class LineReader:
+    pass
