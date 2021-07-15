@@ -11,6 +11,8 @@ def requests_counter_obj() -> RequestsCounter:
 def test_RequestsCounter_for_proper_incrementation(requests_counter_obj):
     requests_counter_obj.update(1)
     assert requests_counter_obj.count == 1
+    requests_counter_obj.update(5)
+    assert requests_counter_obj.count == 6
 
 
 def test_RequestsCounter_for_requests_per_second_calculation(
