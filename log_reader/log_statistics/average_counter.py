@@ -1,0 +1,2 @@
+class AverageCounter:
+    pass
