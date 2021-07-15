@@ -20,5 +20,7 @@ def parse_to_datetime(datetime_str: str) -> datetime:
 
 
 def _print_error():
-    print(f'Invalid date format. Valid formats:\n'
-          f'DD-MM-YYYY_HH-MM-SS\nDD-MM-YYYY_HH-MM')
+    valid_formats = "\n".join([
+        date_format for date_format in VALID_DATE_FORMATS
+    ])
+    print(f'Invalid date format. Valid formats:\n{valid_formats}')
