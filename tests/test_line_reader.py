@@ -26,7 +26,7 @@ def grouped_output(line_with_output) -> tuple:
 
 def test_LineReader_correct_fetching_data_from_log_line(line_reader_obj,
                                                         grouped_output):
-    assert line_reader_obj.get_grouped_line() == grouped_output
+    assert line_reader_obj.grouped_line == grouped_output
 
 
 def test_LineReader_for_proper_fields_assignation(line_reader_obj,
