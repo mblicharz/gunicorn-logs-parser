@@ -1,7 +1,7 @@
 from collections import Counter
 
 
-class ResponsesCounter(Counter):
+class ResponseCounter(Counter):
     def __init__(self):
         super().__init__()
 

@@ -1,7 +1,7 @@
 from datetime import datetime
 
 
-class RequestsCounter:
+class RequestCounter:
     def __init__(self):
         self.count = 0
 
