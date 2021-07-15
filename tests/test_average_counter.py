@@ -21,3 +21,7 @@ def test_AverageCounter_for_counting_average(average_counter_obj):
     average_counter_obj.add(1500)
     average_counter_obj.add(2000)
     assert average_counter_obj.average() == 1500
+
+
+def test_AverageCounter_for_counting_average_of_nothing(average_counter_obj):
+    assert average_counter_obj.average() == 0
