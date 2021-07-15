@@ -1,0 +1,2 @@
+class RequestsCounter:
+    pass
