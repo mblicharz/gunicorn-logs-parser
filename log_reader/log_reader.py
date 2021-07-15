@@ -14,6 +14,8 @@ class LogReader:
         self.file = file_path
         self.from_date = from_date
         self.to_date = to_date
+        self.first_date = None
+        self.last_date = None
 
         self._reader = self._read_file()
 
@@ -34,6 +36,11 @@ class LogReader:
 
             for file_line in file_lines:
                 log_line = self._fetch_log_line(file_line)
+
+                if self.last_date:
+                    self.first_date = self._get_datetime_from_log(log_line)
+                else:
+                    self.last_date = self._get_datetime_from_log(log_line)
 
                 if self.from_date or self.to_date:
                     log_date_in_range = self._check_log_datetime(log_line)
