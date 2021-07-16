@@ -1,6 +1,6 @@
 import argparse
 
-from log_reader import parse_to_datetime
+from log_reader import parse_to_datetime, read_log
 
 
 def parse_args() -> argparse.Namespace:
@@ -16,3 +16,5 @@ def parse_args() -> argparse.Namespace:
 
 if __name__ == '__main__':
     args = parse_args()
+
+    read_log(args.logfile, args.From, args.To)
