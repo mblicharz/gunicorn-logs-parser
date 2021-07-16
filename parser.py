@@ -4,12 +4,12 @@ from log_reader import parse_to_datetime, read_log
 
 
 def parse_args() -> argparse.Namespace:
-    args_parser = argparse.ArgumentParser(description='parser')
+    args_parser = argparse.ArgumentParser(description='Gunicorn log parser')
     args_parser.add_argument('-f', '--From', type=parse_to_datetime,
-                             help='From date')
+                             help='Date from which the logs will be taken', )
     args_parser.add_argument('-t', '--To', type=parse_to_datetime,
-                             help='To date')
-    args_parser.add_argument('logfile', type=str)
+                             help='Date to which the logs will be taken')
+    args_parser.add_argument('logfile', type=str, help='Path to log file')
 
     return args_parser.parse_args()
 
