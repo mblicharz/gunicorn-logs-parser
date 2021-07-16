@@ -68,12 +68,3 @@ class LogReader:
             and (not self.to_date or self.to_date >= dt)
 
         return in_range
-
-    def _get_datetime(self, log: str) -> datetime:
-        log_date = self._extract_date(log)
-        log_date = parse_to_datetime_without_timezone(log_date)
-        return log_date
-
-    @staticmethod
-    def _extract_date(log: str) -> str:
-        return log[log.find('[') + 1: log.find(']')]
