@@ -7,12 +7,7 @@ from .datetime_parser import parse_to_datetime_without_timezone
 
 
 class LogReader:
-    def __init__(
-            self,
-            file_path: str,
-            from_date: datetime,
-            to_date: datetime
-    ) -> None:
+    def __init__(self, file_path: str, from_date: datetime, to_date: datetime) -> None:
         self._validate_path(file_path)
 
         self.file = file_path
@@ -55,7 +50,7 @@ class LogReader:
 
     @staticmethod
     def _extract_log_line(file_line: str) -> LogLine:
-        log_line = file_line.split(': ')[1]
+        log_line = file_line.split(": ")[1]
         return LogLine(log_line)
 
     def _is_in_date_range(self, log_line: LogLine) -> bool:
@@ -64,7 +59,8 @@ class LogReader:
         if not dt:
             return False
 
-        in_range = (not self.from_date or self.from_date <= dt) \
-            and (not self.to_date or self.to_date >= dt)
+        in_range = (not self.from_date or self.from_date <= dt) and (
+            not self.to_date or self.to_date >= dt
+        )
 
         return in_range
