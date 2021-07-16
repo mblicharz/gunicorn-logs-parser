@@ -16,6 +16,10 @@ def read_log(
     for line in reader:
         sc.add_line()
 
+        if not line:
+            sc.add_failure()
+            continue
+
         if _is_status_code_2xx(int(line.status_code)):
             sc.add_response_len(int(line.response_len))
 
@@ -32,6 +36,8 @@ def _is_status_code_2xx(status_code: int) -> bool:
 
 def _print_results(sc: StatisticCollector, lr: LogReader) -> None:
     print(f"All lines: {sc.lines}")
+
+    print(f'Failures: {sc.failures}')
 
     print(f"Requests: {sc.requests}")
 
