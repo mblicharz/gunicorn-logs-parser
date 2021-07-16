@@ -4,6 +4,7 @@ from collections.abc import Iterable
 from log_reader.datetime_parser import parse_to_datetime
 from log_reader.datetime_parser import parse_to_datetime_without_timezone
 from log_reader.log_reader import LogReader
+from tests import common
 from tests.common import log_file_path
 
 
@@ -14,7 +15,7 @@ def test_if_LogReader_object_is_iterable():
 
 def test_LogReader_FileNotFoundError_handled():
     with pytest.raises(FileNotFoundError):
-        log_reader = LogReader('file/that/not/exists', None, None)
+        LogReader('file/that/not/exists', None, None)
 
 
 def test_LogReader_for_correct_number_of_records_with_defined_from_and_to_dates():
@@ -45,14 +46,8 @@ def test_LogReader_for_correct_number_of_records_with_defined_to_date():
 def test_LogReader_for_correct_number_of_records_without_date_range():
     log_reader = LogReader(log_file_path, None, None)
 
-    all_lines_count = 0
-    with open(log_file_path) as file:
-        next(file)
-        for _ in file:
-            all_lines_count += 1
-
     read_lines = 0
     for _ in log_reader:
         read_lines += 1
 
-    assert all_lines_count == read_lines
+    assert common.log_file_lines_count == read_lines
