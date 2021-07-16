@@ -1,6 +1,6 @@
 import pytest
 
-from log_reader import LogLine
+from log_reader.log_reader import LogLine
 from tests import common
 
 

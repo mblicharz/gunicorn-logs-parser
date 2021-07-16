@@ -1,7 +1,7 @@
 import pytest
 
 from collections.abc import Iterable
-from log_reader import parse_to_datetime
+from log_reader.datetime_parser import parse_to_datetime
 from log_reader import LogReader
 from tests.common import log_file_path
 
