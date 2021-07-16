@@ -1,4 +1,5 @@
 log_file_path = './tests/resources/test_logs.log2'
+log_file_with_wrong_format_path = './tests/resources/test_logs2.log2'
 
 log_line_with_splitted_output = {
     'output': (
