@@ -2,7 +2,8 @@ import pytest
 
 from collections.abc import Iterable
 from log_reader.datetime_parser import parse_to_datetime
-from log_reader import LogReader
+from log_reader.datetime_parser import parse_to_datetime_without_timezone
+from log_reader.log_reader import LogReader
 from tests.common import log_file_path
 
 
@@ -20,33 +21,38 @@ def test_LogReader_for_correct_number_of_records_with_defined_from_and_to_dates(
     from_date = parse_to_datetime('30-11-2019_21-00-16')
     to_date = parse_to_datetime('01-12-2019_11-06-07')
     log_reader = LogReader(log_file_path, from_date, to_date)
-    counter = 0
-    for _ in log_reader:
-        counter += 1
-    assert counter == 6
+    for line in log_reader:
+        dt = parse_to_datetime_without_timezone(line.date)
+        assert from_date <= dt <= to_date
 
 
 def test_LogReader_for_correct_number_of_records_with_defined_from_date():
     from_date = parse_to_datetime('30-11-2019_20-02-08')
     log_reader = LogReader(log_file_path, from_date, None)
-    counter = 0
-    for _ in log_reader:
-        counter += 1
-    assert counter == 7
+    for line in log_reader:
+        dt = parse_to_datetime_without_timezone(line.date)
+        assert from_date <= dt
 
 
 def test_LogReader_for_correct_number_of_records_with_defined_to_date():
     to_date = parse_to_datetime('30-11-2019_20-02-08')
     log_reader = LogReader(log_file_path, None, to_date)
-    counter = 0
-    for _ in log_reader:
-        counter += 1
-    assert counter == 7
+    for line in log_reader:
+        dt = parse_to_datetime_without_timezone(line.date)
+        assert dt <= to_date
 
 
 def test_LogReader_for_correct_number_of_records_without_date_range():
     log_reader = LogReader(log_file_path, None, None)
-    counter = 0
+
+    all_lines_count = 0
+    with open(log_file_path) as file:
+        next(file)
+        for _ in file:
+            all_lines_count += 1
+
+    read_lines = 0
     for _ in log_reader:
-        counter += 1
-    assert counter == 13
+        read_lines += 1
+
+    assert all_lines_count == read_lines
