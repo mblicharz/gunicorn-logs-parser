@@ -1,6 +1,8 @@
 from datetime import datetime
 from pathlib import Path
 
+from .datetime_parser import parse_to_datetime_without_timezone
+
 
 class LogReader:
     def __init__(
@@ -56,6 +58,9 @@ class LogReader:
     def _is_in_date_range(self, log_line: str) -> bool:
         log_date = self._get_datetime(log_line)
 
+        if not log_date:
+            return False
+
         in_range = not self.from_date or self.from_date <= log_date \
             and not self.to_date or self.to_date >= log_date
 
@@ -63,14 +68,9 @@ class LogReader:
 
     def _get_datetime(self, log: str) -> datetime:
         log_date = self._extract_date(log)
-        log_date = self._parse_to_datetime_without_timezone(log_date)
+        log_date = parse_to_datetime_without_timezone(log_date)
         return log_date
 
     @staticmethod
     def _extract_date(log: str) -> str:
         return log[log.find('[') + 1: log.find(']')]
-
-    @staticmethod
-    def _parse_to_datetime_without_timezone(date: str) -> datetime:
-        date_format = '%d/%b/%Y:%H:%M:%S %z'
-        return datetime.strptime(date, date_format).replace(tzinfo=None)
