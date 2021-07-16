@@ -1,22 +1,22 @@
 import pytest
 
-from log_reader import LineReader
-from tests import tools
+from log_reader import LogLine
+from tests import common
 
 
 def test_LineReader_raising_ValueError_if_bad_line_format():
     with pytest.raises(ValueError):
-        line_reader = LineReader('some bad line')
+        line_reader = LogLine('some bad line')
 
 
 @pytest.fixture()
 def line_with_output() -> dict:
-    return tools.get_log_line_with_grouped_output()
+    return common.log_line_with_splitted_output
 
 
 @pytest.fixture()
-def line_reader_obj(line_with_output) -> LineReader:
-    return LineReader(line_with_output['line'])
+def line_reader_obj(line_with_output) -> LogLine:
+    return LogLine(line_with_output['line'])
 
 
 @pytest.fixture()
@@ -26,7 +26,7 @@ def grouped_output(line_with_output) -> tuple:
 
 def test_LineReader_correct_fetching_data_from_log_line(line_reader_obj,
                                                         grouped_output):
-    assert line_reader_obj.grouped_line == grouped_output
+    assert line_reader_obj.line == grouped_output
 
 
 def test_LineReader_for_proper_fields_assignation(line_reader_obj,

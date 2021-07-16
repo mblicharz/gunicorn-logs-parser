@@ -25,51 +25,51 @@ class LogReader:
     def __next__(self):
         return next(self._reader)
 
-    def _validate_path(self, path: str) -> None:
-        file = Path(path)
-        if not file.is_file():
+    @staticmethod
+    def _validate_path(path: str) -> None:
+        if not Path(path).is_file():
             raise FileNotFoundError
 
     def _read_file(self):
         with open(self.file) as file_lines:
             next(file_lines)
 
+            # TODO: Move to external function and spread on smaller functions
+            # TODO: Check time execution
+            # TODO: Change log_line to raw_log_line
             for file_line in file_lines:
                 log_line = self._fetch_log_line(file_line)
 
-                if self.last_date:
-                    self.first_date = self._get_datetime_from_log(log_line)
-                else:
-                    self.last_date = self._get_datetime_from_log(log_line)
+                self._set_first_and_last_date(log_line)
 
-                if self.from_date or self.to_date:
-                    log_date_in_range = self._check_log_datetime(log_line)
-                    if log_date_in_range:
-                        yield log_line
-                else:
+                edge_date_exists = self.from_date or self.to_date
+
+                if not edge_date_exists or self._is_log_in_date_range(log_line):
                     yield log_line
+
+    def _set_first_and_last_date(self, log_line: str) -> None:
+        if not self.last_date:
+            self.last_date = self._get_datetime_from_log(log_line)
+        self.first_date = self._get_datetime_from_log(log_line)
 
     def _fetch_log_line(self, file_line: str) -> str:
         return file_line.split(': ')[1]
 
-    def _check_log_datetime(self, log: str) -> bool:
-        log_date = self._get_datetime_from_log(log)
+    # TODO: Change for shorter name
+    def _is_log_in_date_range(self, log_line: str) -> bool:
+        log_date = self._get_datetime_from_log(log_line)
 
-        date_in_range = False
+        # TODO: PLEASE, change this horrible names
+        from_meet = False
+        to_meet = False
 
-        if self.from_date and not self.to_date and \
-                self.from_date <= log_date:
-            date_in_range = True
+        if not self.from_date or self.from_date <= log_date:
+            from_meet = True
 
-        elif not self.from_date and self.to_date and \
-                self.to_date >= log_date:
-            date_in_range = True
+        if not self.to_date or self.to_date >= log_date:
+            to_meet = True
 
-        elif self.from_date and self.to_date and \
-                self.from_date <= log_date <= self.to_date:
-            date_in_range = True
-
-        return date_in_range
+        return from_meet and to_meet
 
     def _get_datetime_from_log(self, log: str) -> datetime:
         log_date = self._fetch_date_from_log(log)
@@ -80,5 +80,5 @@ class LogReader:
         return log[log.find('[') + 1: log.find(']')]
 
     def _parse_to_datetime_without_timezone(self, date: str) -> datetime:
-        return datetime.strptime(date, '%d/%b/%Y:%H:%M:%S %z') \
-            .replace(tzinfo=None)
+        date_format = '%d/%b/%Y:%H:%M:%S %z'
+        return datetime.strptime(date, date_format).replace(tzinfo=None)
