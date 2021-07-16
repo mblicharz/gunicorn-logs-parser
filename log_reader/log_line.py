@@ -1,7 +1,9 @@
 import re
 from typing import Sequence
 
-VALID_LOG_FORMAT = r'([(\d\.)]+) - (.*?) \[(.*?)\] "(.*?)" (\d+) (\d+) "(.*?)" "(.*?)" (\d+)'
+VALID_LOG_FORMAT = (
+    r'([(\d\.)]+) - (.*?) \[(.*?)\] "(.*?)" (\d+) (\d+) "(.*?)" "(.*?)" (\d+)'
+)
 
 
 class LogLine:

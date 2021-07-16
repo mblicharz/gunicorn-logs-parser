@@ -1,6 +1,6 @@
 from datetime import datetime
 
-VALID_DATE_FORMATS = ['%d-%m-%Y_%H-%M-%S', '%d-%m-%Y_%H-%M']
+VALID_DATE_FORMATS = ["%d-%m-%Y_%H-%M-%S", "%d-%m-%Y_%H-%M"]
 
 
 def parse_to_datetime(datetime_str: str) -> datetime:
@@ -20,7 +20,7 @@ def parse_to_datetime(datetime_str: str) -> datetime:
 
 
 def parse_to_datetime_without_timezone(datetime_str: str) -> datetime:
-    date_format = '%d/%b/%Y:%H:%M:%S %z'
+    date_format = "%d/%b/%Y:%H:%M:%S %z"
     dt = None
 
     try:
@@ -32,7 +32,5 @@ def parse_to_datetime_without_timezone(datetime_str: str) -> datetime:
 
 
 def _print_error():
-    valid_formats = "\n".join([
-        date_format for date_format in VALID_DATE_FORMATS
-    ])
-    print(f'Invalid date format. Valid formats:\n{valid_formats}')
+    valid_formats = "\n".join([date_format for date_format in VALID_DATE_FORMATS])
+    print(f"Invalid date format. Valid formats:\n{valid_formats}")
