@@ -31,16 +31,10 @@ last_date = None
 for line in log_reader:
     lines_count += 1
 
-    try:
-        line_reader = LogLine(line)
-    except ValueError:
-        # TODO: Add warning about invalid log line
-        continue
+    response_counter.update({line.status_code: 1})
 
-    response_counter.update({line_reader.status_code: 1})
-
-    if is_status_code_2xx(int(line_reader.status_code)):
-        avg_counter.add(int(line_reader.response_len))
+    if is_status_code_2xx(int(line.status_code)):
+        avg_counter.add(int(line.response_len))
 
     request_counter.update(1)
 
