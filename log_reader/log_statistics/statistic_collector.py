@@ -1,0 +1,2 @@
+class StatisticCollector:
+    pass
