@@ -2,7 +2,7 @@ import argparse
 
 from log_reader import parse_to_datetime
 from log_reader import RequestCounter, ResponseCounter, AverageCounter
-from log_reader import LogReader, LogLine
+from log_reader import LogReader
 
 
 def is_status_code_2xx(status_code: int) -> bool:
@@ -38,6 +38,7 @@ for line in log_reader:
 
     request_counter.update(1)
 
+# TODO: Move results print to external file
 print('Parsing results:')
 
 print(f'All records: {lines_count}')
@@ -55,7 +56,6 @@ print(f'requests per sec: {requests_per_sec}')
 
 print(f'responses: {response_counter.get_output()}')
 
-# TODO: Move to external file
 avg_size = ("%.2f" % (avg_counter.average() * 8 / 1024))
 print(f'Average size of 2xx responses: {avg_size} Mb')
 
