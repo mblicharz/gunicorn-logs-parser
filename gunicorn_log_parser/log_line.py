@@ -1,11 +1,6 @@
 import re
+import config
 from typing import Sequence, Optional
-
-DEFAULT_LOG_FORMAT = r'%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s" %(D)s'
-
-DEFAULT_LOG_FORMAT_REGEX = (
-    r'([(\d\.)]+) - (.*?) \[(.*?)\] "(.*?)" (\d+) (\d+) "(.*?)" "(.*?)" (\d+)'
-)
 
 FORMAT_IDENTIFIERS_REGEX = {
     "%(h)s": r'"?([(\d\.)]+)"?',
@@ -37,15 +32,15 @@ class LogLine:
     def __init__(
             self,
             raw_log_line: str,
-            log_format: Optional[str] = DEFAULT_LOG_FORMAT
+            log_format: Optional[str] = None
     ) -> None:
-        self.format = log_format
-        self.line = self._split_line(raw_log_line, log_format)
+        self.format = config.log_format if not log_format else log_format
+        self.line = self._split_line(raw_log_line)
 
         self._fetch_data()
 
-    def _split_line(self, line: str, log_format: str) -> Sequence[str]:
-        regex = self._parse_log_format_to_regex(log_format)
+    def _split_line(self, line: str) -> Sequence[str]:
+        regex = self._parse_log_format_to_regex(self.format)
         match = re.match(regex, line)
         if not match:
             raise ValueError
