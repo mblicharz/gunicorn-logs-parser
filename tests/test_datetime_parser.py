@@ -1,7 +1,7 @@
 import pytest
 
 from datetime import datetime
-from log_reader.datetime_parser import parse_to_datetime
+from gunicorn_log_parser.datetime_parser import parse_to_datetime
 
 with_seconds_format = '%d-%m-%Y_%H-%M-%S'
 no_seconds_format = '%d-%m-%Y_%H-%M'

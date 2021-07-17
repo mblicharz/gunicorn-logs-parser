@@ -1,6 +1,6 @@
 import pytest
 
-from log_reader.log_reader import LogLine
+from gunicorn_log_parser.log_reader import LogLine
 from tests import common
 
 

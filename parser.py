@@ -1,6 +1,6 @@
 import argparse
 
-from log_reader import parse_to_datetime, read_log
+from gunicorn_log_parser import parse_to_datetime, read_log
 
 
 def parse_args() -> argparse.Namespace:

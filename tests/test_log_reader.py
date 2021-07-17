@@ -1,9 +1,9 @@
 import pytest
 
 from collections.abc import Iterable
-from log_reader.datetime_parser import parse_to_datetime
-from log_reader.datetime_parser import parse_to_datetime_without_timezone
-from log_reader.log_reader import LogReader
+from gunicorn_log_parser.datetime_parser import parse_to_datetime
+from gunicorn_log_parser.datetime_parser import parse_to_datetime_without_timezone
+from gunicorn_log_parser.log_reader import LogReader
 from tests import common
 from tests.common import log_file_path
 

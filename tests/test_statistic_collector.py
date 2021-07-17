@@ -2,7 +2,7 @@ from datetime import datetime
 
 import pytest
 
-from log_reader import StatisticCollector
+from gunicorn_log_parser import StatisticCollector
 
 
 @pytest.fixture()
