@@ -1,16 +1,5 @@
--- Logs begin at Fri 2019-11-30 09:07:18 CEST, end at Wed 2019-12-01 11:06:07 CET. --
-Dec 01 11:06:07 app3-test-vm1 gunicorn[53253]: 172.16.3.14 - - [01/Dec/2019:11:06:07 +0100] "GET /internal/user/03144bdb-805e-4a56-836f-3324a812fe0f/agenda/2019-12-01/2019-12-02 HTTP/1.1" 200 720 "-" "python-requests/2.22.0" 402636
-Dec 01 11:06:05 app3-test-vm1 gunicorn[53253]: 172.16.3.14 - - [01/Dec/2019:11:06:05 +0100] "GET /internal/user/38ca8008-fb70-44f0-a356-9bb9192ba15c/agenda/2019-12-01/2019-12-02 HTTP/1.1" 200 720 "-" "python-requests/2.22.0" 276202
-Dec 01 11:05:45 app3-test-vm1 gunicorn[53253]: 172.16.3.5  - [01/Dec/2019:11:05:45 +0100] "GET /.well-known/assetlinks.json HTTP/1.0" 404 0 "-" "GoogleAssociationService" 288488
-Dec 01 11:05:29 app3-test-vm1 gunicorn[53253]: 172.16.3.5 - - [01/Dec/2019:11:05:29 +0100] "GET /apple-app-site-association HTTP/1.0" 404 0 "-" "swcd (unknown version) CFNetwork/1107.1 Darwin/19.0.0" 150014
-Dec 01 11:05:29 app3-test-vm1 gunicorn[53253]: 172.16.3.5 - - [01/Dec/2019:11:05:29 +0100] "GET /apple-app-site-association HTTP/1.0" 404 0 "-" "swcd (unknown version) CFNetwork/1107.1 Darwin/19.0.0" 351810
-Nov 30 21:00:16 actify3-test-vm1 gunicorn[53253]: 172.16.3.5 - - [30/Nov/2019:21:00:16 +0100] "POST /auth/login/ HTTP/1.0" 200 251 "-" "ActifyTest/814 CFNetwork/1107.1 Darwin/19.0.0" 413494
-Nov 30 20:02:08 actify3-test-vm1 gunicorn[53253]: 172.16.3.14  - [30/Nov/2019:20:02:08 +0100] "GET /internal/user/7cdd78b7-249f-459d-ad72-119ee1c1a0d0/agenda/2019-11-30/2019-12-01 HTTP/1.1" 200 720 "-" "python-requests/2.22.0" 585862
-Nov 30 20:02:07 actify3-test-vm1 gunicorn[53253]: 172.16.3.14 - - [30/Nov/2019:20:02:07 +0100] "GET /internal/user/de451163-483a-41c2-92d1-f9b2a4142591/agenda/2019-11-30/2019-12-01 HTTP/1.1" 200 720 "-" "python-requests/2.22.0" 38474
-Nov 30 20:02:07 actify3-test-vm1 gunicorn[53253]: 172.16.3.14  - [30/Nov/2019:20:02:07 +0100] "GET /internal/user/d094b38a-6e26-4354-826a-9f4f8ecdec76/agenda/2019-11-30/2019-12-01 HTTP/1.1" 200 720 "-" "python-requests/2.22.0" 429834
-Nov 30 19:02:46 actify3-test-vm1 gunicorn[53253]: 172.16.3.14 - - [30/Nov/2019:19:02:46 +0100] "GET /internal/user/4f56cd98-e806-4528-81c7-c1af1d8b5ca0/agenda/2019-11-30/2019-12-01 HTTP/1.1" 200 720 "-" "python-requests/2.22.0" 279667
-Nov 30 19:02:46 actify3-test-vm1 gunicorn[53253]: 172.16.3.14  - [30/Nov/2019:19:02:46 +0100] "GET /internal/user/848db68b-c33b-40ce-9c67-4d1afe087981/agenda/2019-11-30/2019-12-01 HTTP/1.1" 200 720 "-" "python-requests/2.22.0" 441629
-Nov 30 17:42:16 actify3-test-vm1 gunicorn[53253]: 172.16.3.5 - - [30/Nov/2019:17:42:16 +0100] "POST /auth/login/ HTTP/1.0" 200 251 "-" "ActifyTest/805 CFNetwork/1120 Darwin/19.0.0" 285897
-Nov 30 09:07:18 actify3-test-vm1 gunicorn[53253]: 172.16.3.14 - - [30/Nov/2019:09:07:18 +0100] "GET /internal/user/6ccc6db2-81ed-4c52-8e4f-8d6d1dfac4ec/agenda/2019-11-30/2019-12-01 HTTP/1.1" 200 720 "-" "python-requests/2.22.0" 521828
-Nov 30 09:07:18 actify3-test-vm1 gunicorn[53253]: 172.16.3.14 - - [30/Nov/2019:09:07:18 +0100] "GET /internal/user/aef93a86-dad3-4d91-853d-664ac6091fa0/agenda/2019-11-30/2019-12-01 HTTP/1.1" 200 720 "-" "python-requests/2.22.0" 348565
-Nov 30 09:07:18 actify3-test-vm1 gunicorn[53253]: 172.16.3.14 - - [30/Nov/2019:09:07:18 +0100] "GET /internal/user/74230293-6301-4832-a876-6033f6df585b/agenda/2019-11-30/2019-12-01 HTTP/1.1" 200 720 "-" "python-requests/2.22.0" 146792
+172.16.3.5 - - [01/Dec/2019:11:05:29 +0100] "GET /apple-app-site-association HTTP/1.0" 404 0 "-" "swcd (unknown version) CFNetwork/1107.1 Darwin/19.0.0" 150014
+172.16.3.5 - - [01/Dec/2019:11:05:29 +0100] "GET /apple-app-site-association HTTP/1.0" 404 0 "-" "swcd (unknown version) CFNetwork/1107.1 Darwin/19.0.0"
+172.16.3.5 - - [01/Dec/2019:11:05:29 +0100] GET /apple-app-site-association HTTP/1.0 404 0 - swcd (unknown version) CFNetwork/1107.1 Darwin/19.0.0 150014
+172.16.3.5 - - [01/Dec/2019:11:05:29 +0100] "GET /apple-app-site-association HTTP/1.0" 404 0 - swcd (unknown version) CFNetwork/1107.1 Darwin/19.0.0" 150014
+172.16.3.5 150014 - [01/Dec/2019:11:05:29 +0100] "GET /apple-app-site-association HTTP/1.0" 404 0 "-" "swcd (unknown version) CFNetwork/1107.1 Darwin/19.0.0"
