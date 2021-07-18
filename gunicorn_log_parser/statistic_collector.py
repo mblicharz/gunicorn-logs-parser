@@ -1,3 +1,5 @@
+import sys
+
 from config import statistics
 
 from gunicorn_log_parser.log_line import LogLine
@@ -19,7 +21,8 @@ class StatisticCollector:
             try:
                 self.statistics.update({statistic_name: statistic()})
             except TypeError:
-                print(f'Error in config: {statistic_name}->class')
+                sys.exit(f'Error in config: {statistic_name}[class].'
+                         f' Class not found.')
 
     def collect(self, log_line: LogLine) -> None:
         if not log_line:
