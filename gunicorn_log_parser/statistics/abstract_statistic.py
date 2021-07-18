@@ -6,7 +6,7 @@ from gunicorn_log_parser.log_line import LogLine
 
 class AbstractStatistic(ABC):
     @abstractmethod
-    def update(self, log_line: Optional[LogLine]) -> None:
+    def update(self, log_line: Optional[LogLine] = None) -> None:
         raise NotImplementedError
 
     @abstractmethod

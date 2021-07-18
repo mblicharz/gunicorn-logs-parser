@@ -10,7 +10,7 @@ class RequestsCount(AbstractStatistic):
 
         self.requests = 0
 
-    def update(self, log_line: Optional[LogLine]) -> None:
+    def update(self, log_line: Optional[LogLine] = None) -> None:
         self.requests += 1
 
     def get_result_repr(self) -> str:
