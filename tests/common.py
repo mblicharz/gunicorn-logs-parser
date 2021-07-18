@@ -46,9 +46,29 @@ def get_examples_log_formats_with_lines() -> Dict[str, str]:
 
 
 correct_results_examples = (
-        ('172.16.3.5', '-', '01/Dec/2019:11:05:29 +0100', 'GET /apple-app-site-association HTTP/1.0', '404', '0', '-', 'swcd (unknown version) CFNetwork/1107.1 Darwin/19.0.0', '150014'),
-        ('172.16.3.5', '-', '01/Dec/2019:11:05:29 +0100', 'GET /apple-app-site-association HTTP/1.0', '404', '0', '-', 'swcd (unknown version) CFNetwork/1107.1 Darwin/19.0.0'),
-        ('172.16.3.5', '-', '01/Dec/2019:11:05:29 +0100', 'GET /apple-app-site-association HTTP/1.0', '404', '0', '-', 'swcd (unknown version) CFNetwork/1107.1 Darwin/19.0.0 150014'),
-        ('172.16.3.5', '-', '01/Dec/2019:11:05:29 +0100', 'GET /apple-app-site-association HTTP/1.0', '404', '0', '-', 'swcd (unknown version) CFNetwork/1107.1 Darwin/19.0.0', '150014'),
-        ('172.16.3.5', '150014', '-', '01/Dec/2019:11:05:29 +0100', 'GET /apple-app-site-association HTTP/1.0', '404', '0', '-', 'swcd (unknown version) CFNetwork/1107.1 Darwin/19.0.0')
-    )
+    ('172.16.3.5', '-', '01/Dec/2019:11:05:29 +0100',
+     'GET /apple-app-site-association HTTP/1.0', '404', '0', '-',
+     'swcd (unknown version) CFNetwork/1107.1 Darwin/19.0.0', '150014'),
+    ('172.16.3.5', '-', '01/Dec/2019:11:05:29 +0100',
+     'GET /apple-app-site-association HTTP/1.0', '404', '0', '-',
+     'swcd (unknown version) CFNetwork/1107.1 Darwin/19.0.0'),
+    ('172.16.3.5', '-', '01/Dec/2019:11:05:29 +0100',
+     'GET /apple-app-site-association HTTP/1.0', '404', '0', '-',
+     'swcd (unknown version) CFNetwork/1107.1 Darwin/19.0.0 150014'),
+    ('172.16.3.5', '-', '01/Dec/2019:11:05:29 +0100',
+     'GET /apple-app-site-association HTTP/1.0', '404', '0', '-',
+     'swcd (unknown version) CFNetwork/1107.1 Darwin/19.0.0', '150014'),
+    ('172.16.3.5', '150014', '-', '01/Dec/2019:11:05:29 +0100',
+     'GET /apple-app-site-association HTTP/1.0', '404', '0', '-',
+     'swcd (unknown version) CFNetwork/1107.1 Darwin/19.0.0')
+)
+
+single_200_log_line = {
+    'format': '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s" %(D)s',
+    'line': '172.16.3.14 - - [01/Dec/2019:11:06:05 +0100] "GET /internal/user/5fdbb021-eebd-4156-a8a7-132289cef8a4/agenda/2019-12-01/2019-12-02 HTTP/1.1" 200 720 "-" "python-requests/2.22.0" 72680'
+}
+
+single_404_log_line = {
+    'format': '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s" %(D)s',
+    'line': '172.16.3.5 - - [01/Dec/2019:11:05:29 +0100] "GET /apple-app-site-association HTTP/1.0" 404 0 "-" "swcd (unknown version) CFNetwork/1107.1 Darwin/19.0.0" 150014'
+}

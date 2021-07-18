@@ -1,8 +1,12 @@
 from datetime import datetime
+from config import statistics, output_template
 
 from .log_reader import LogReader
 from .statistic_collector import StatisticCollector
 from .datetime_parser import parse_to_datetime
+
+
+__all__ = ["parse_to_datetime", "read_log"]
 
 
 def read_log(
@@ -14,57 +18,25 @@ def read_log(
     sc = StatisticCollector()
 
     for line in reader:
-        sc.add_line()
-
-        if not line:
-            sc.add_failure()
+        try:
+            sc.collect(line)
+        except ValueError:
             continue
 
-        if _is_status_code_2xx(int(line.status_code)):
-            sc.add_response_len(int(line.response_len))
-
-        sc.add_response(line.status_code)
-
-        sc.add_request()
-
-    _print_results(sc, reader)
+    _print_results(sc)
 
 
-def _is_status_code_2xx(status_code: int) -> bool:
-    return 300 > status_code >= 200
+def _print_results(sc: StatisticCollector) -> None:
+    placeholders = {}
 
+    for statistic_name, statistic_cfg in statistics.items():
+        placeholder = statistic_cfg.get('placeholder')
 
-def _print_results(sc: StatisticCollector, lr: LogReader) -> None:
-    print(f"All lines: {sc.lines}")
+        if statistic_cfg.get('active'):
+            result_repr = sc.statistics.get(statistic_name).get_result_repr()
+        else:
+            result_repr = 'inactive'
 
-    print(f'Failures: {sc.failures}')
+        placeholders.update({placeholder: result_repr})
 
-    print(f"Requests: {sc.requests}")
-
-    requests_per_sec = _count_requests_per_second(
-        sc.requests, lr.first_date, lr.last_date
-    )
-    print(f"Requests per second: {requests_per_sec}")
-
-    print(f"Responses: ({_format_responses_count(sc.get_responses())})")
-
-    avg_size = _count_average_response_size(sc.average_response_len())
-    print(f"avg size of 2xx responses: {avg_size} Mb")
-
-
-def _count_requests_per_second(
-    requests: int, from_date: datetime, to_date: datetime
-) -> float:
-    seconds = (to_date - from_date).total_seconds()
-    return float("%.2f" % (requests / seconds))
-
-
-def _format_responses_count(responses: dict) -> str:
-    return ", ".join([f"{k}: {v}" for k, v in responses.items()])
-
-
-def _count_average_response_size(avg_response_len: float) -> float:
-    return float("%.2f" % (avg_response_len * 8 / 1024))
-
-
-__all__ = ["parse_to_datetime", "read_log"]
+    print(output_template.format(**placeholders))
