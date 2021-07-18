@@ -3,7 +3,7 @@ Script for parsing gunicorn log to get some statistics from it.
 
 ### Log format
 The log format given below is a default one, and stores **all supported** identifiers.
-The format can be changed in _config.ini_.
+The format can be changed in _config.py_.
 ```
 %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s" %(D)s
 ```
