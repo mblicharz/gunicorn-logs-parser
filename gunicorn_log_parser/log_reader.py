@@ -18,8 +18,6 @@ class LogReader:
         self.file = file_path
         self.from_date = from_date
         self.to_date = to_date
-        self.first_date = None
-        self.last_date = None
 
         self._reader = self._read_file()
 
@@ -50,19 +48,12 @@ class LogReader:
         except ValueError:
             return None
 
-        self._set_first_and_last_date(log_line)
-
         edge_date_exists = self.from_date or self.to_date
 
         if not edge_date_exists or self._is_in_date_range(log_line):
             return log_line
         else:
             raise ValueError
-
-    def _set_first_and_last_date(self, log_line: LogLine) -> None:
-        if not self.last_date:
-            self.last_date = parse_to_datetime_without_timezone(log_line.date)
-        self.first_date = parse_to_datetime_without_timezone(log_line.date)
 
     @staticmethod
     def _extract_log_line(file_line: str) -> LogLine:
