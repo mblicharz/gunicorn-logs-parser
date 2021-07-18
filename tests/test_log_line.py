@@ -15,7 +15,3 @@ def test_LogLine_different_formats():
             pytest.fail('Unexpected ValueError')
 
         assert log_line.line in correct_results
-
-
-
-
