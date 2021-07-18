@@ -41,9 +41,12 @@ class LogLine:
 
     def _split_line(self, line: str) -> Sequence[str]:
         regex = self._parse_log_format_to_regex(self.format)
+
         match = re.match(regex, line)
+
         if not match:
             raise ValueError
+
         return match.groups()
 
     def _parse_log_format_to_regex(self, log_format: str) -> str:
