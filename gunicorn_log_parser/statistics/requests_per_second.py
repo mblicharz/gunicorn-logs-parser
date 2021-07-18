@@ -13,8 +13,7 @@ class RequestsPerSecond(AbstractStatistic):
         self.last_date = None
 
     def update(self, log_line: Optional[LogLine] = None) -> None:
-        if self.last_date:
-            self.first_date = parse_to_datetime_without_timezone(log_line.date)
+        self.first_date = parse_to_datetime_without_timezone(log_line.date)
 
         if not self.last_date:
             self.last_date = parse_to_datetime_without_timezone(log_line.date)
@@ -27,6 +26,7 @@ class RequestsPerSecond(AbstractStatistic):
         try:
             avg = self.requests / diff_secs
         except ZeroDivisionError:
-            avg = 0.0
+            # returns the number of requests because no seconds have elapsed
+            avg = self.requests
 
         return f'{float("%.2f" % avg)}/sec'
