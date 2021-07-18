@@ -1,13 +1,13 @@
 import pytest
 
 from gunicorn_log_parser.log_line import LogLine
-from gunicorn_log_parser.statistics import ResponsesCount
+from gunicorn_log_parser.statistics import ResponsesCodesCount
 from tests.common import single_200_log_line, single_404_log_line
 
 
 @pytest.fixture()
-def responses_count_obj() -> ResponsesCount:
-    return ResponsesCount()
+def responses_count_obj() -> ResponsesCodesCount:
+    return ResponsesCodesCount()
 
 
 @pytest.fixture()
@@ -34,7 +34,7 @@ def test_ResponsesCount_update(
     responses_count_obj.update(log_line_200_obj)
     responses_count_obj.update(log_line_404_obj)
 
-    assert responses_count_obj.responses == {200: 1, 404: 1}
+    assert responses_count_obj.responses_codes == {200: 1, 404: 1}
 
 
 def test_ResponsesCount_result_repr(
