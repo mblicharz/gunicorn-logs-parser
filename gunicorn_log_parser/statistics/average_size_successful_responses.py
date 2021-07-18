@@ -15,11 +15,7 @@ class AverageSizeSuccessfulResponses(AbstractStatistic):
             self.sum_size += int(log_line.response_len)
 
     def get_result_repr(self) -> str:
-        try:
-            avg_size = self.sum_size / self.responses
-        except ZeroDivisionError:
-            avg_size = 0.0
+        avg_size_as_bytes = self.sum_size / self.responses
+        avg_size_as_megabits = avg_size_as_bytes * 8 / 1024 / 1024
 
-        avg_size = avg_size * 8 / 1024 / 1024
-
-        return f'{float("%.2f" % avg_size)} Mb'
+        return f'{float("%.2f" % avg_size_as_megabits)} Mb'
