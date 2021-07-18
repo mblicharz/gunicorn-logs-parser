@@ -93,3 +93,4 @@ Add your new statistic in _config.py_ file into **statistics** section as below:
 [gunicorn]: <https://docs.gunicorn.org/en/stable/settings.html#access-log-format>
 [log_line.py]: <https://github.com/mblicharz/gunicorn-logs-parser/blob/master/gunicorn_log_parser/log_line.py>
 [AbstractStatistic]: <https://github.com/mblicharz/gunicorn-logs-parser/blob/master/gunicorn_log_parser/statistics/abstract_statistic.py>
+[config.py]: <https://github.com/mblicharz/gunicorn-logs-parser/blob/master/config.py>
