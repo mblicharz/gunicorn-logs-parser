@@ -81,7 +81,7 @@ To create your own class for your statistic, you should inherit class _[Abstract
 - _update()_ - collect and store data from single LogLine object
 - _get_result_repr()_ - returns string representation of statistic
 
-Add your new statistic in _config.py_ file into **statistics** section as below:
+Add your new statistic in _[config.py]_ file into **statistics** section as below:
 ```python
 'requests_count': { # Name of your statistics
         'active': True, # If active, it will be taken into account during calculations
